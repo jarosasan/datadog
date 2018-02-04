@@ -1,0 +1,30 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+//@import "compass/reset";
+
+
+body{
+  background-color: whitesmoke;
+}
+#map{
+  height: 500px;
+  width: 100%;
+  margin: 2rem auto;
+}
+.form{
+  margin: 3rem auto;
+}
+footer{
+  height: 40px;
+  width: 100%;
+  background-color: #868e96;
+}
+.butt{
+  width: 100%;
+}
+#table{
+  margin-bottom: 20px;
+}

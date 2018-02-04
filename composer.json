@@ -1,0 +1,10 @@
+{
+    "name": "jaroslavlomecki/datadog",
+    "authors": [
+        {
+            "name": "Jaroslav Lomecki",
+            "email": "jaroslavlo@gmail.com"
+        }
+    ],
+    "require": {}
+}

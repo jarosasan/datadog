@@ -1,0 +1,31 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 9, ../sass/style.scss */
+body {
+  background-color: whitesmoke; }
+
+/* line 12, ../sass/style.scss */
+#map {
+  height: 500px;
+  width: 100%;
+  margin: 2rem auto; }
+
+/* line 17, ../sass/style.scss */
+.form {
+  margin: 3rem auto; }
+
+/* line 20, ../sass/style.scss */
+footer {
+  height: 40px;
+  width: 100%;
+  background-color: #868e96; }
+
+/* line 25, ../sass/style.scss */
+.butt {
+  width: 100%; }
+
+/* line 28, ../sass/style.scss */
+#table {
+  margin-bottom: 20px; }
