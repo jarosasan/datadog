@@ -1,13 +1,28 @@
 <?php
 	namespace app;
+	
+	include "app/Import.php";
 	use PDO;
+//	use app\Import;
+	
 	
 	class Database {
 		
 		private $connection;
+		private $import;
 		
 		public function __construct(){
+			if ( $this->databaseExists(CONFIG['db_name']) ==1){
+				$this->connect();
+			}else{
+				new Import();
+				$this->connect();
+			}
+		}
 			
+
+			
+		private function connect(){
 			
 			try {
 				$this->connection = new PDO("mysql:host=" . CONFIG['db_hostname'] . ";dbname=" . CONFIG['db_name'] . ";charset=utf8", CONFIG['db_username'], CONFIG['db_password']);
@@ -19,17 +34,18 @@
 			}
 		}
 		
-		private function connToDb(){
-			try {
+		private function databaseExists($db){
+		
 				$this->connection = new PDO("mysql:host=" . CONFIG['db_hostname'] . ";charset=utf8", CONFIG['db_username'], CONFIG['db_password']);
-				// set the PDO error mode to exception
-				$this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				$this->connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, FALSE);
 				
-				$sql = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = " . CONFIG['db_name']."";
-			} catch(PDOException $e) {
-				echo $e->getMessage();
-			}
+				$sql = "SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$db'";
+				$statement = $this->connection->prepare($sql);
+				$statement->execute();
+				$this -> connection = null;
+				
+				$r =  $statement->fetchColumn();
+				return $r;
+			
 		}
 		
 		

@@ -67,19 +67,19 @@
 	
 	</div>
 </div>
-<footer></footer>
+<footer class="page-footer">
+	<div class="container">
+		<div class="time"></div>
+		<div class="memory"></div>
+	</div>
+</footer>
 
 
-<script
-		src="https://code.jquery.com/jquery-3.3.1.min.js"
-		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-		crossorigin="anonymous"></script>
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+<script	src="https://code.jquery.com/jquery-3.3.1.min.js"		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
-<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>-->
+
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4BLiS1-b1BSin89wJ12ne_ao-Gvt5-kI&callback=initMap"></script>
-<!--<script src="https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood4&key=YAIzaSyDoIINSt3FZYhwl0zJVWpNrdxMxLbsJ3us"></script>-->
+
 <script src="/<?= CONFIG['site_path']?>/assets/js/script.js"></script>
 
 </body>
