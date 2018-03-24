@@ -3,7 +3,6 @@
 	
 	include "app/Import.php";
 	use PDO;
-//	use app\Import;
 	
 	
 	class Database {
@@ -12,7 +11,7 @@
 		private $import;
 		
 		public function __construct(){
-			if ( $this->databaseExists(CONFIG['db_name']) ==1){
+			if ( $this->tablesExists(CONFIG['db_name']) > 0){
 				$this->connect();
 			}else{
 				new Import();
@@ -34,11 +33,14 @@
 			}
 		}
 		
-		private function databaseExists($db){
-		
-				$this->connection = new PDO("mysql:host=" . CONFIG['db_hostname'] . ";charset=utf8", CONFIG['db_username'], CONFIG['db_password']);
+		private function tablesExists($db){
+			
+			$this->connection = new PDO("mysql:host=" . CONFIG['db_hostname'] . ";dbname=information_schema;charset=utf8", CONFIG['db_username'], CONFIG['db_password']);
+			
+			$this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$this->connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, FALSE);
 				
-				$sql = "SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$db'";
+				$sql = "SELECT COUNT( TABLE_NAME )  FROM COLUMNS WHERE TABLE_SCHEMA = '$db'";
 				$statement = $this->connection->prepare($sql);
 				$statement->execute();
 				$this -> connection = null;

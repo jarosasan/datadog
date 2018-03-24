@@ -9,7 +9,7 @@
 	 
 	
 	public function __construct() {
-		$this->createDb();
+//		$this->createDb();
 		$this->createTables();
 		$this->addDataToDb();
 	}

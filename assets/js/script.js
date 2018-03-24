@@ -5,7 +5,7 @@ var home;
 var map;
 var locations;
 var markers = [];
-var flightPath = [];
+var flightPath;
 // Init google map
 function initMap() {
 	 directionsDisplay = new google.maps.DirectionsRenderer;
@@ -23,7 +23,6 @@ function initMap() {
 }
 
 
-
 //Get addres from google maps geocode
  function geocodeAddress(geocoder, resultsMap) {
 	 var address = document.getElementById('address').value;
@@ -33,11 +32,10 @@ function initMap() {
 			 lat = results[0].geometry.location.lat();//Latitude
 			 long = results[0].geometry.location.lng();//longitude
 
-			 //Put marker in the map
-			  marker = new google.maps.Marker({
+			  markers.push( new google.maps.Marker({
 				 map: resultsMap,
 				 position: results[0].geometry.location
-			 });
+			 }));
 			 home = results[0].formatted_address;
 		 } else {
 			 alert('Geocode was not successful for the following reason: ' + status);
@@ -55,10 +53,9 @@ function initMap() {
 				longi: long,
 				distance: $("#num").val()
 			},
-			function (data, status, xhr) {
+			function (data) {
 
 				locations = data['brewery'];
-				console.log(locations);
 
 				$('#distance').html('');
 				$('#distance').html("Total distance Travelled: "+data.dist+" km");
@@ -95,11 +92,10 @@ function initMap() {
 
 
 				for(var m = 0; m < locations.length; m ++){
-					markers = new google.maps.Marker({
+					markers.push( new google.maps.Marker({
 						position: new google.maps.LatLng(locations[m].latitude, locations[m].longitude),
-						map: map,
-						title: locations[m].brewery_id
-					});
+						map: map
+					}));
 				}
 
 
@@ -126,25 +122,15 @@ function setMapOnAll(map) {
 function clearMarkers() {
 	setMapOnAll(null);
 }
-
-
-
 // Deletes all markers in the array by removing references to them.
 function deleteMarkers() {
 	clearMarkers();
 	markers = [];
 }
 
-
-
-
 document.getElementById('button').addEventListener('click', function() {
-	// if (flightPath.length > 0){
-	// 	removeLine();
-	// }
-	removeLine();
+	if(flightPath){
+		removeLine();
+	}
 	deleteMarkers();
-
-
-
 });
