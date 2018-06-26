@@ -117,8 +117,9 @@
 				$cont[] = fgetcsv( $data );
 			}
 			fclose( $data );
-			
+			dump($data);
 			return ( $cont );
+		
 		}
 		
 		private function addDataToDb() {
