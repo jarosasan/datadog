@@ -28,6 +28,12 @@
 			return $this->db->select("SELECT name FROM beers WHERE brewery_id = " . $brewery_id ." ");
 			
 		}
+
+        public function getBeersCount($brewery_id)
+        {
+            return $this->db->select("SELECT COUNT(brewery_id) FROM beers WHERE brewery_id = " . $brewery_id ." ");
+
+        }
 		
 		public function addUser(array $userData)
 		{

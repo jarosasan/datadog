@@ -45,8 +45,7 @@ function initMap() {
 
 
 	$("#go").click(function respons() {
-
-		$.post("/codeacademy/datadog/start.php",
+		$.post("./start.php",
 			{
 				home: home,
 				lati: lat,
@@ -54,9 +53,8 @@ function initMap() {
 				distance: $("#num").val()
 			},
 			function (data) {
-
+			console.log(data);
 				locations = data['brewery'];
-
 				$('#distance').html('');
 				$('#distance').html("Total distance Travelled: "+data.dist+" km");
 				$('#beersColection').html('');
@@ -72,8 +70,6 @@ function initMap() {
 				$('#list1').append("<li class='collection-header align'><h4>Beers types collection</h4></li>");
 				$.each(data['beers'], function (i, field) {
 					$("#list1").append("<li class='collection-item'><div>"+(i+1)+". "+field.name +"</div></li>");
-
-
 				});
 
 				var path = [];

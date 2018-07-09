@@ -53,11 +53,12 @@
 					filepath VARCHAR(255) NULL,
 					descript TEXT NULL,
 					add_user INT(6) NULL ,
-					last_mod TIMESTAMP)";
+					last_mod VARCHAR (255))";
 			$statement = $this->connection->prepare($sql);
 			$statement->execute();
 			
-			$sql = "CREATE TABLE IF NOT EXISTS breweries (
+			$sql = "
+CREATE TABLE IF NOT EXISTS breweries (
 					id int(6),
 					name VARCHAR (255),
 					address1 VARCHAR (255),
@@ -71,14 +72,14 @@
 					filepath VARCHAR(255) NULL,
 					descript TEXT NULL,
 					add_user INT(6) NULL ,
-					last_mod TIMESTAMP)";
+					last_mod VARCHAR (255))";
 			$statement = $this->connection->prepare($sql);
 			$statement->execute();
 			
 			$sql = "CREATE TABLE IF NOT EXISTS categories (
 					id int(6) NOT  NULL ,
 					cat_name VARCHAR (255) NOT NULL ,
-					last_mod TIMESTAMP)";
+					last_mod VARCHAR (255))";
 			$statement = $this->connection->prepare($sql);
 			$statement->execute();
 			
@@ -95,7 +96,7 @@
 					id int(6) NOT NULL ,
 					cat_id INT (6) NOT  NULL ,
 					style_name VARCHAR (255) NOT  NULL ,
-					last_mod TIMESTAMP)";
+					last_mod VARCHAR (255))";
 			$statement = $this->connection->prepare($sql);
 			$statement->execute();
 			
@@ -111,13 +112,11 @@
 		 * @return array
 		 */
 		private function getDataCsv( $table ) {
-			
-			$data = fopen( 'beerCsv/' . $table . '.csv', 'r' );
+			$data = fopen( './beerCsv/' . $table . '.csv', 'r' );
 			while ( ! feof( $data ) ) {
 				$cont[] = fgetcsv( $data );
 			}
 			fclose( $data );
-			dump($data);
 			return ( $cont );
 		
 		}
@@ -154,10 +153,8 @@
 						
 						$statement = $this->connection->prepare($sql);
 						$statement->execute();
-
 					}
 				}
-				
 			} catch ( PDOException $e ) {
 				echo "Error; " . $e -> getMessage();
 			}

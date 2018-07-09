@@ -49,7 +49,10 @@
 				return $r;
 			
 		}
-		
+
+		private function tableEmpty() {
+
+        }
 		
 		// Select
 		public function select( $sql,  $param = [])

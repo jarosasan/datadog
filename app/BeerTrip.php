@@ -16,9 +16,10 @@
 		
 		
 		
-		/**
+		/*
 		 * @param array $geocodes
-		 */
+         *
+		 **/
 		private function getGeocodes() {
 			$model=$this->model;
 			$this -> geocodes = $model->getGeocod();
@@ -43,13 +44,14 @@
 		private function brewery($id){
 			$model = $this->model;
 			$brewery = $model->getBrewery($id);
-			return $brewery[0]['name'];
+			$b = $brewery[0]['name'];
+			return $b;
+
 		}
 		
-		
 		/*
-	 *
-	 * */
+	     *
+	     * */
 		private function cmp( $a, $b ) {
 			if ( $a['distance'] == $b['distance'] ) {
 				return 0;
@@ -63,11 +65,33 @@
 			uasort($array, array($this, 'cmp'));
 			return $array;
 		}
+
+
+        /*
+         *
+         * */
+        private function cmp1( $a, $b ) {
+            if ( $a['distance'] == $b['distance'] ) {
+                return 0;
+            }
+            return ( $a['distance'] < $b['distance'] ) ? - 1 : 1;
+        }
+        /*
+         * @return sort array by distance.
+         * */
+        private function sortBrewery( $array ) {
+            uasort($array, array($this, 'cmp1'));
+            return $array;
+        }
 		
-		/* *
-		* @return array a distance between the pocket.
-		* */
-		private function distanceAll( $start, $brewery, $trDist ) {
+
+        /**
+         * @param $start
+         * @param $brewery
+         * @param $trDist
+         * @return array
+         */
+        private function distanceAll($start, $brewery, $trDist ) {
 			$allDist = [];
 			for ( $i = 0; $i < count( $brewery ); $i ++ ) {
 				$finish['latitude']  = $brewery[ $i ]['latitude'];
@@ -77,6 +101,7 @@
 					$dist['brewery_id'] = $brewery[ $i ]['brewery_id'];
 					$dist['latitude']   = $brewery[ $i ]['latitude'];
 					$dist['longitude']  = $brewery[ $i ]['longitude'];
+					$dust['beer_count'] = $this->model->getBeersCount($brewery[$i]['brewery_id']);
 					$allDist[]          = $dist;
 				}
 			}
@@ -121,8 +146,8 @@
 				'brewery_id' => 0,
 				'name'      => $_POST['home'],
 				'latitude'   => $_POST['lati'],
-				'longitude'  => $_POST['longi']
-			
+				'longitude'  => $_POST['longi'],
+                'beer_count' => 0
 			];
 			
 			$tripDist = $_POST['distance'];
@@ -143,7 +168,6 @@
 					$dist      += $first['distance'];
 					$first['name'] = $this->brewery($first['brewery_id']);
 					$results[] = $first;
-//					$top = $this->sortDist($top);
 					$top = $this->distanceAll($first, $top, $tripDist);
 					$top = $this->sortDist($top);
 					$beersResult = array_merge($beersResult, $this -> beers( $first['brewery_id'] ));
@@ -152,13 +176,8 @@
 					$results[] = $start;
 					$allDist = $dist + $start['distance'];
 					$dist =$tripDist +1;
-					
 				}
-				
 			}
-			
-			
-			
 			$result['brewery']    = $results;
 			$result['beers']      = $beersResult;
 			$result['dist']       = round($allDist, 3);
