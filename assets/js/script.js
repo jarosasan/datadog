@@ -62,9 +62,9 @@ function initMap() {
 				$('.tname').html('');
 				$('.tname').append("<h4>Breweries and distances</h4>");
 				$('table').html('');
-				$('table').append("<thead><tr><th>Id</th><th>Brewery</th><th>Latitude</th><th>Longitude</th><th>Distance</th></tr></thead><tbody></tbody>");
+				$('table').append("<thead><tr><th>Id</th><th>Brewery</th><th>Beers</th><th>Latitude</th><th>Longitude</th><th>Distance</th></tr></thead><tbody></tbody>");
 				$.each(data['brewery'], function (i, field) {
-				$("tbody").append("<tr><td>" + field.brewery_id + "</td><td>" + field.name + "</td><td>" + field.latitude + "</td><td>" + field.longitude + "</td><td>" + field.distance + "Km</td></tr>");
+				$("tbody").append("<tr><td>" + field.brewery_id + "</td><td>" + field.name + "</td><td>" + field.beer_count + "</td><td>" + field.latitude + "</td><td>" + field.longitude + "</td><td>" + field.distance + "Km</td></tr>");
 				});
 				$('#list1').html('');
 				$('#list1').append("<li class='collection-header align'><h4>Beers types collection</h4></li>");

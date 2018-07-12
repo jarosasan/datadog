@@ -86,8 +86,9 @@ CREATE TABLE IF NOT EXISTS breweries (
 			$sql = "CREATE TABLE IF NOT EXISTS geocodes (
 					id int(6) NOT NULL ,
 					brewery_id int(6) NOT  NULL ,
-					latitude DOUBLE NOT NULL ,
-					longitude DOUBLE NOT NULL ,
+					latitude DECIMAL(9,6) NOT NULL ,
+					longitude DECIMAL(9,6) NOT NULL ,
+					
 					accuracy VARCHAR (255))";
 			$statement = $this->connection->prepare($sql);
 			$statement->execute();
@@ -99,6 +100,17 @@ CREATE TABLE IF NOT EXISTS breweries (
 					last_mod VARCHAR (255))";
 			$statement = $this->connection->prepare($sql);
 			$statement->execute();
+
+            $sql = "CREATE TABLE IF NOT EXISTS temp (
+					id int(6) NOT NULL ,
+					brewery_id INT (6) NOT  NULL ,
+					name VARCHAR (255) NOT  NULL ,
+					latitude DOUBLE NOT NULL ,
+					longitude DOUBLE NOT NULL ,
+					distance FLOAT ,
+					beer_count INT (2))";
+            $statement = $this->connection->prepare($sql);
+            $statement->execute();
 			
 			
 		} catch(PDOException $e) {

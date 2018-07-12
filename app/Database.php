@@ -18,9 +18,7 @@
 				$this->connect();
 			}
 		}
-			
 
-			
 		private function connect(){
 			
 			try {
